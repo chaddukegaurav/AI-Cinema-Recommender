@@ -1,18 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 
 const Login = () => {
+
+  const [isLogin, setIsLogin] = useState(true)
+  const handleSignUp = () =>{
+    setIsLogin(!isLogin)
+  }
   return (
-    <>
-      <Header/>
-      <div>
+    <div className="relative min-h-screen bg-gray-100">
+      {/* Header */}
+      <Header />
+
+      {/* Background Image */}
+      <div className="absolute inset-0">
         <img
-          className='w-full'
-          src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f562aaf4-5dbb-4603-a32b-6ef6c2230136/dh0w8qv-9d8ee6b2-b41a-4681-ab9b-8a227560dc75.jpg/v1/fill/w_1192,h_670,q_70,strp/the_netflix_login_background__canada__2024___by_logofeveryt_dh0w8qv-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6IlwvZlwvZjU2MmFhZjQtNWRiYi00NjAzLWEzMmItNmVmNmMyMjMwMTM2XC9kaDB3OHF2LTlkOGVlNmIyLWI0MWEtNDY4MS1hYjliLThhMjI3NTYwZGM3NS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.LOYKSxIDqfPwWHR0SSJ-ugGQ6bECF0yO6Cmc0F26CQs'
-          alt='logo'
+          src="https://images8.alphacoders.com/118/thumb-1920-1185403.jpg"
+          alt="logo"
+          className="w-full h-full object-cover"
         />
       </div>
-    </>
+
+      {/* Form Container */}
+      <div className="relative flex items-center justify-center min-h-screen">
+        <form className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg bg-opacity-90">
+          <h1 className="font-bold text-3xl mb-6 text-center">Login</h1>
+          
+          {
+            !isLogin && 
+            <input
+            type="text"
+            placeholder="Email address"
+            className="block w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          }
+          <input
+            type="text"
+            placeholder="Email address"
+            className="block w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="block w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <button
+            className="block w-full bg-red-500 text-white font-semibold p-3 rounded-md hover:bg-red-600 transition"
+          >
+            {/* {!isSignUpForm ? "Sign Up" : 'Log In'} */}
+          {isLogin ? 'Login' : 'Signup'}
+          </button>
+          <p className='p-1 mt-2 font-bold cursor-pointer' onClick={handleSignUp}>{!isLogin ? "Already have account ? Login.." : "Didn't have account ? Sign Up"}</p>
+        </form>
+      </div>
+    </div>
   );
 };
 
