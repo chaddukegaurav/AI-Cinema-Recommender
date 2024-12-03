@@ -17,7 +17,7 @@ const Login = () => {
   const handleButtonClick = () => {
     //validate the form data
 
-    const message = checkValidData(name.current.value, email.current.value, password.current.value);
+    const message = checkValidData(name?.current?.value, email?.current?.value, password?.current?.value);
     setCredentialMessage(message);
   };
   return (

@@ -9,5 +9,7 @@ export const checkValidData = (name, email, password) => {
   if (!checkEmail) return 'Email is Incorrect, Please check !';
   if (!checkPassword) return 'Password is Incorrect, Please check !';
   if (!checkName) return 'Enter the correct name !';
+
+  return null;
   
 };
