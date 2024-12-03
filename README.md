@@ -7,6 +7,11 @@
 - Login / Sign up form 
 
     - Sign In/ Sign up form 
+    - Routing of app
+    - Header
+    - Form Validation
+    - useRef Hook
+    - 
 
 - Browse (Only comes after authentication)
     - Header 
