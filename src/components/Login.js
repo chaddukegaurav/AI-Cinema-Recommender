@@ -1,6 +1,11 @@
 import React, { useRef, useState } from 'react';
 import Header from './Header';
 import { checkValidData } from '../utils/validate';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../utils/firebase';
+import { Route } from 'react-router';
+import Browse from './Browse';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,15 +15,61 @@ const Login = () => {
 
   const [credentialMessage, setCredentialMessage] = useState(null);
 
-  const name = useRef()
+  const name = useRef();
   const email = useRef();
   const password = useRef();
 
   const handleButtonClick = () => {
     //validate the form data
 
-    const message = checkValidData(name?.current?.value, email?.current?.value, password?.current?.value);
+    const message = checkValidData(
+      name?.current?.value,
+      email?.current?.value,
+      password?.current?.value
+    );
     setCredentialMessage(message);
+
+    if (message) return;
+
+    if (!isLogin) {
+      createUserWithEmailAndPassword(
+        auth,
+        email?.current?.value,
+        password?.current?.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log('Firebase error ', errorCode, errorMessage);
+          setCredentialMessage(errorCode + '-' + errorMessage);
+          // ..
+        });
+    } else {
+      ////login
+      signInWithEmailAndPassword(
+        auth,
+        email?.current?.value,
+        password?.current?.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log('Firebase error ', errorCode, errorMessage);
+          setCredentialMessage(errorCode + '-' + errorMessage);
+        });
+    }
   };
   return (
     <div className='relative min-h-screen bg-gray-100'>
