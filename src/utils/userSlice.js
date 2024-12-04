@@ -4,7 +4,7 @@ const useSlice = createSlice({
     name : "user",
     initialState : null,
     reducers : {
-        addUser : 
+        addUser : 'jh'
     }
 
 })
